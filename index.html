@@ -18,16 +18,9 @@
       --accent-soft: #fb7185;
       --heart-stroke: #fda4af;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
-      height: 100%;
-      overflow: hidden;
+      height: 100%; overflow: hidden;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background:
         radial-gradient(ellipse 120% 80% at 50% 0%, #fff5f8 0%, transparent 55%),
@@ -36,74 +29,26 @@
         linear-gradient(165deg, #fffafb 0%, #fdf2f8 35%, #f5f3ff 70%, #eef2ff 100%);
       color: var(--text);
     }
-
     #app {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      position: relative; width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
-
     .bg-glow {
-      position: absolute;
-      width: min(720px, 90vw);
-      height: min(720px, 90vw);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: absolute; width: min(720px, 90vw); height: min(720px, 90vw);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
       background: radial-gradient(circle, rgba(253, 164, 175, 0.22) 0%, rgba(251, 207, 232, 0.12) 40%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      animation: glowPulse 8s ease-in-out infinite;
+      pointer-events: none; z-index: 0; animation: glowPulse 8s ease-in-out infinite;
     }
-
     @keyframes glowPulse {
       0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
       50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
     }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      pointer-events: none;
-      z-index: 0;
-      will-change: transform;
-    }
-    .orb-1 {
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, #fda4af 0%, #fb7185 60%, transparent 100%);
-      opacity: 0.35; top: -120px; left: -80px;
-      animation: float1 18s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 340px; height: 340px;
-      background: radial-gradient(circle, #c4b5fd 0%, #a78bfa 55%, transparent 100%);
-      opacity: 0.3; bottom: -100px; right: -70px;
-      animation: float2 22s ease-in-out infinite;
-    }
-    .orb-3 {
-      width: 240px; height: 240px;
-      background: radial-gradient(circle, #fbcfe8 0%, #f9a8d4 50%, transparent 100%);
-      opacity: 0.4; top: 35%; right: 8%;
-      animation: float3 14s ease-in-out infinite;
-    }
-    .orb-4 {
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, #fef3c7 0%, #fde68a 50%, transparent 100%);
-      opacity: 0.25; bottom: 20%; left: 5%;
-      animation: float1 16s ease-in-out infinite reverse;
-    }
-    .orb-5 {
-      width: 160px; height: 160px;
-      background: radial-gradient(circle, #ddd6fe 0%, #c4b5fd 50%, transparent 100%);
-      opacity: 0.28; top: 15%; left: 20%;
-      animation: float3 20s ease-in-out infinite 3s;
-    }
-
+    .orb { position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none; z-index: 0; will-change: transform; }
+    .orb-1 { width: 380px; height: 380px; background: radial-gradient(circle, #fda4af 0%, #fb7185 60%, transparent 100%); opacity: 0.35; top: -120px; left: -80px; animation: float1 18s ease-in-out infinite; }
+    .orb-2 { width: 340px; height: 340px; background: radial-gradient(circle, #c4b5fd 0%, #a78bfa 55%, transparent 100%); opacity: 0.3; bottom: -100px; right: -70px; animation: float2 22s ease-in-out infinite; }
+    .orb-3 { width: 240px; height: 240px; background: radial-gradient(circle, #fbcfe8 0%, #f9a8d4 50%, transparent 100%); opacity: 0.4; top: 35%; right: 8%; animation: float3 14s ease-in-out infinite; }
+    .orb-4 { width: 200px; height: 200px; background: radial-gradient(circle, #fef3c7 0%, #fde68a 50%, transparent 100%); opacity: 0.25; bottom: 20%; left: 5%; animation: float1 16s ease-in-out infinite reverse; }
+    .orb-5 { width: 160px; height: 160px; background: radial-gradient(circle, #ddd6fe 0%, #c4b5fd 50%, transparent 100%); opacity: 0.28; top: 15%; left: 20%; animation: float3 20s ease-in-out infinite 3s; }
     @keyframes float1 {
       0%, 100% { transform: translate(0, 0) scale(1); }
       33% { transform: translate(30px, -20px) scale(1.05); }
@@ -118,19 +63,16 @@
       0%, 100% { transform: translate(0, 0); }
       50% { transform: translate(-20px, -30px); }
     }
-
     .vignette {
       position: absolute; inset: 0;
       background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(255, 240, 245, 0.35) 100%);
       pointer-events: none; z-index: 1;
     }
-
     .grain {
       position: absolute; inset: 0; opacity: 0.04; pointer-events: none; z-index: 2;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-repeat: repeat; background-size: 180px 180px;
     }
-
     #message {
       position: relative; z-index: 10; max-width: 520px; padding: 0 28px;
       text-align: center; font-size: clamp(1rem, 2.8vw, 1.28rem);
@@ -138,26 +80,17 @@
     }
     #message .line { display: block; margin-bottom: 0.45em; }
     #message .line:last-child { margin-bottom: 0; font-weight: 500; font-size: 1.08em; }
-    #message .letter {
-      display: inline-block; opacity: 0; transform: translateY(-28px); transition: none;
-    }
+    #message .letter { display: inline-block; opacity: 0; transform: translateY(-28px); transition: none; }
     #message .letter.visible {
       opacity: 1; transform: translateY(0);
       transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
     }
     #message .letter.space { width: 0.28em; }
-
-    #stage {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      z-index: 5; pointer-events: none;
-    }
-
+    #stage { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
     #replay {
-      position: absolute; bottom: 48px; left: 50%;
-      transform: translateX(-50%) translateY(20px);
+      position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%) translateY(20px);
       z-index: 20; opacity: 0; pointer-events: none;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.72); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(225, 29, 72, 0.18); color: var(--accent);
       font-family: inherit; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.02em;
       padding: 12px 28px; border-radius: 999px; cursor: pointer;
@@ -167,7 +100,6 @@
     #replay.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
     #replay:hover { background: rgba(255, 255, 255, 0.92); box-shadow: 0 6px 28px rgba(225, 29, 72, 0.14); }
     #replay:active { transform: translateX(-50%) scale(0.97); }
-
     #signature {
       position: absolute; bottom: 110px; left: 50%; transform: translateX(-50%);
       z-index: 15; font-size: 0.9rem; font-weight: 400; color: var(--text);
@@ -186,13 +118,11 @@
     <div class="orb orb-5"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
-
     <div id="message" aria-live="polite"></div>
     <canvas id="stage"></canvas>
     <div id="signature">Andy</div>
     <button id="replay" type="button">Ver de nuevo</button>
   </div>
-
   <script>
     const LINES = [
       "Hola Ma, espero la pases muy lindo",
@@ -201,10 +131,9 @@
       "espero que te guste y disfrutes tu d\u00eda.",
       "Andy"
     ];
-
     const LETTER_DELAY = 32;
     const HOLD_AFTER_TEXT = 2000;
-    const PARTICLES_PER_LETTER = 10;
+    const PARTICLES_PER_LETTER = 12;
     const FORM_DURATION = 2600;
     const FILL_DURATION = 2000;
 
@@ -257,7 +186,6 @@
       messageEl.style.opacity = '1';
       messageEl.style.transition = 'none';
       letterSpans = [];
-
       LINES.forEach((line, idx) => {
         const lineEl = document.createElement('span');
         lineEl.className = 'line';
@@ -287,41 +215,41 @@
     function startDisintegration() {
       animationPhase = 'disintegrate';
       particles = [];
-
       heartScale = Math.min(width, height) * 0.014;
       cx = width / 2;
       cy = height / 2 - 10;
-      outlinePts = generateHeartOutline(240, heartScale, cx, cy);
+      outlinePts = generateHeartOutline(360, heartScale, cx, cy);
 
+      const origins = [];
       letterSpans.forEach((span) => {
         if (span.classList.contains('space')) return;
         const rect = span.getBoundingClientRect();
-        const startX = rect.left + rect.width / 2;
-        const startY = rect.top + rect.height / 2;
-
-        for (let p = 0; p < PARTICLES_PER_LETTER; p++) {
-          const target = outlinePts[Math.floor(Math.random() * outlinePts.length)];
-          const angle = Math.random() * Math.PI * 2;
-          const speed = 1.5 + Math.random() * 3.5;
-
-          particles.push({
-            x: startX + (Math.random() - 0.5) * 4,
-            y: startY + (Math.random() - 0.5) * 4,
-            vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed,
-            targetX: target.x + (Math.random() - 0.5) * 2.5,
-            targetY: target.y + (Math.random() - 0.5) * 2.5,
-            size: 1.8 + Math.random() * 2.4,
-            alpha: 0.9,
-            color: Math.random() > 0.65 ? '#fb7185' : '#e11d48',
-            delay: Math.random() * 0.2
-          });
-        }
-
+        origins.push({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
         span.style.transition = 'opacity 0.35s ease, transform 0.4s ease';
         span.style.opacity = '0';
         span.style.transform = 'scale(0.3)';
       });
+
+      const totalParticles = origins.length * PARTICLES_PER_LETTER;
+      for (let i = 0; i < totalParticles; i++) {
+        const origin = origins[i % origins.length];
+        const targetIdx = Math.floor((i / totalParticles) * outlinePts.length);
+        const target = outlinePts[targetIdx];
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 1.2 + Math.random() * 3.2;
+        particles.push({
+          x: origin.x + (Math.random() - 0.5) * 4,
+          y: origin.y + (Math.random() - 0.5) * 4,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          targetX: target.x + (Math.random() - 0.5) * 1.2,
+          targetY: target.y + (Math.random() - 0.5) * 1.2,
+          size: 1.6 + Math.random() * 1.6,
+          alpha: 0.92,
+          color: Math.random() > 0.6 ? '#fb7185' : '#e11d48',
+          delay: Math.random() * 0.18
+        });
+      }
 
       setTimeout(() => {
         messageEl.style.transition = 'opacity 0.3s ease';
@@ -329,40 +257,28 @@
       }, 450);
 
       let startTime = null;
-
       function animateForm(ts) {
         if (!startTime) startTime = ts;
         const t = Math.min(1, (ts - startTime) / FORM_DURATION);
-
         ctx.clearRect(0, 0, width, height);
         let allClose = true;
-
         particles.forEach(p => {
           const localT = Math.max(0, Math.min(1, (t - p.delay) / (1 - p.delay * 0.5)));
           const eased = easeOutCubic(localT);
-
           if (localT < 0.2) {
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vx *= 0.94;
-            p.vy *= 0.94;
+            p.x += p.vx; p.y += p.vy; p.vx *= 0.94; p.vy *= 0.94;
           }
-
           const pull = 0.045 + eased * 0.14;
           p.x += (p.targetX - p.x) * pull;
           p.y += (p.targetY - p.y) * pull;
-
           if (Math.hypot(p.targetX - p.x, p.targetY - p.y) > 2.5) allClose = false;
-
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * (0.75 + eased * 0.25), 0, Math.PI * 2);
           ctx.fillStyle = p.color;
           ctx.globalAlpha = p.alpha * (0.55 + eased * 0.45);
           ctx.fill();
         });
-
         ctx.globalAlpha = 1;
-
         if (t < 1 || !allClose) {
           rafId = requestAnimationFrame(animateForm);
         } else {
@@ -370,14 +286,12 @@
           startFillWithParticles();
         }
       }
-
       rafId = requestAnimationFrame(animateForm);
     }
 
     function startFillWithParticles() {
       animationPhase = 'fillHeart';
       const start = performance.now();
-
       let minY = Infinity, maxY = -Infinity;
       outlinePts.forEach(p => {
         if (p.y < minY) minY = p.y;
@@ -388,18 +302,13 @@
       function fillFrame(now) {
         const t = Math.min(1, (now - start) / FILL_DURATION);
         const eased = easeInOutCubic(t);
-
         ctx.clearRect(0, 0, width, height);
 
         ctx.save();
         ctx.beginPath();
-        outlinePts.forEach((pt, i) => {
-          if (i === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
-        });
+        outlinePts.forEach((pt, i) => i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y));
         ctx.closePath();
         ctx.clip();
-
         const fillTop = maxY - heartHeight * eased;
         const gradient = ctx.createLinearGradient(cx, maxY, cx, minY);
         gradient.addColorStop(0, '#be123c');
@@ -425,10 +334,7 @@
           ctx.shadowColor = '#e11d48';
           ctx.shadowBlur = 28;
           ctx.beginPath();
-          outlinePts.forEach((pt, i) => {
-            if (i === 0) ctx.moveTo(pt.x, pt.y);
-            else ctx.lineTo(pt.x, pt.y);
-          });
+          outlinePts.forEach((pt, i) => i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y));
           ctx.closePath();
           ctx.fillStyle = '#e11d48';
           ctx.fill();
@@ -443,26 +349,20 @@
           showReplay();
         }
       }
-
       rafId = requestAnimationFrame(fillFrame);
     }
 
     function drawFinalHeart() {
       ctx.clearRect(0, 0, width, height);
       ctx.beginPath();
-      outlinePts.forEach((pt, i) => {
-        if (i === 0) ctx.moveTo(pt.x, pt.y);
-        else ctx.lineTo(pt.x, pt.y);
-      });
+      outlinePts.forEach((pt, i) => i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y));
       ctx.closePath();
-
       const gradient = ctx.createLinearGradient(cx, cy + heartScale * 14, cx, cy - heartScale * 14);
       gradient.addColorStop(0, '#be123c');
       gradient.addColorStop(0.5, '#e11d48');
       gradient.addColorStop(1, '#f43f5e');
       ctx.fillStyle = gradient;
       ctx.fill();
-
       ctx.save();
       ctx.globalAlpha = 0.25;
       ctx.shadowColor = '#e11d48';
@@ -493,7 +393,7 @@
         heartScale = Math.min(width, height) * 0.014;
         cx = width / 2;
         cy = height / 2 - 10;
-        outlinePts = generateHeartOutline(240, heartScale, cx, cy);
+        outlinePts = generateHeartOutline(360, heartScale, cx, cy);
         drawFinalHeart();
       }
     });
