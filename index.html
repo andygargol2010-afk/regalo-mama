@@ -9,9 +9,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg1: #fff5f7;
+      --bg1: #fff8fb;
       --bg2: #fce7f3;
       --bg3: #f3e8ff;
+      --bg4: #ede9fe;
       --text: #4a3f4a;
       --accent: #e11d48;
       --accent-soft: #fb7185;
@@ -28,7 +29,11 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%);
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 0%, #fff5f8 0%, transparent 55%),
+        radial-gradient(ellipse 90% 70% at 10% 90%, #fce7f3 0%, transparent 50%),
+        radial-gradient(ellipse 80% 60% at 90% 85%, #ede9fe 0%, transparent 50%),
+        linear-gradient(165deg, #fffafb 0%, #fdf2f8 35%, #f5f3ff 70%, #eef2ff 100%);
       color: var(--text);
     }
 
@@ -42,42 +47,110 @@
       justify-content: center;
     }
 
+    .bg-glow {
+      position: absolute;
+      width: min(720px, 90vw);
+      height: min(720px, 90vw);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(253, 164, 175, 0.22) 0%, rgba(251, 207, 232, 0.12) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+    }
+
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.45;
+      filter: blur(70px);
       pointer-events: none;
       z-index: 0;
+      will-change: transform;
     }
     .orb-1 {
-      width: 320px;
-      height: 320px;
-      background: #fda4af;
-      top: -80px;
-      left: -60px;
-      animation: float 12s ease-in-out infinite;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, #fda4af 0%, #fb7185 60%, transparent 100%);
+      opacity: 0.35;
+      top: -120px;
+      left: -80px;
+      animation: float1 18s ease-in-out infinite;
     }
     .orb-2 {
-      width: 280px;
-      height: 280px;
-      background: #c4b5fd;
-      bottom: -60px;
-      right: -40px;
-      animation: float 15s ease-in-out infinite reverse;
+      width: 340px;
+      height: 340px;
+      background: radial-gradient(circle, #c4b5fd 0%, #a78bfa 55%, transparent 100%);
+      opacity: 0.3;
+      bottom: -100px;
+      right: -70px;
+      animation: float2 22s ease-in-out infinite;
     }
     .orb-3 {
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, #fbcfe8 0%, #f9a8d4 50%, transparent 100%);
+      opacity: 0.4;
+      top: 35%;
+      right: 8%;
+      animation: float3 14s ease-in-out infinite;
+    }
+    .orb-4 {
       width: 200px;
       height: 200px;
-      background: #fbcfe8;
-      top: 40%;
-      right: 15%;
-      animation: float 10s ease-in-out infinite 2s;
+      background: radial-gradient(circle, #fef3c7 0%, #fde68a 50%, transparent 100%);
+      opacity: 0.25;
+      bottom: 20%;
+      left: 5%;
+      animation: float1 16s ease-in-out infinite reverse;
+    }
+    .orb-5 {
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, #ddd6fe 0%, #c4b5fd 50%, transparent 100%);
+      opacity: 0.28;
+      top: 15%;
+      left: 20%;
+      animation: float3 20s ease-in-out infinite 3s;
     }
 
-    @keyframes float {
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-15px, 25px) scale(0.97); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      40% { transform: translate(-35px, -25px) scale(1.08); }
+      70% { transform: translate(20px, 15px) scale(0.95); }
+    }
+    @keyframes float3 {
       0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(20px, -25px); }
+      50% { transform: translate(-20px, -30px); }
+    }
+
+    .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(255, 240, 245, 0.35) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 2;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px 180px;
     }
 
     #message {
@@ -190,9 +263,14 @@
 </head>
 <body>
   <div id="app">
+    <div class="bg-glow"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
 
     <div id="message" aria-live="polite"></div>
     <canvas id="stage"></canvas>
@@ -296,7 +374,6 @@
       const heartScale = Math.min(width, height) * 0.0135;
       const cx = width / 2;
       const cy = height / 2 - 20;
-      // Solo el contorno del corazón (sin puntos interiores)
       heartPoints = generateHeartOutline(220, heartScale, cx, cy);
 
       letterSpans.forEach((span) => {
