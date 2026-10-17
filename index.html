@@ -42,7 +42,6 @@
       justify-content: center;
     }
 
-    /* Soft floating orbs for ambient feel */
     .orb {
       position: absolute;
       border-radius: 50%;
@@ -122,7 +121,6 @@
       width: 0.28em;
     }
 
-    /* Canvas for particles + heart */
     #stage {
       position: absolute;
       inset: 0;
@@ -132,7 +130,6 @@
       pointer-events: none;
     }
 
-    /* Replay button */
     #replay {
       position: absolute;
       bottom: 48px;
@@ -172,7 +169,6 @@
       transform: translateX(-50%) scale(0.97);
     }
 
-    /* Small signature that appears near the end */
     #signature {
       position: absolute;
       bottom: 110px;
@@ -205,19 +201,17 @@
   </div>
 
   <script>
-    // ---------- Config ----------
     const LINES = [
       "Hola Ma, espero la pases muy lindo en este día de la madre",
       "en este día de la madre 2026 intenté hacer algo distinto, espero que te guste y disfrutes tu día.",
       "Andy"
     ];
 
-    const LETTER_DELAY = 38;        // ms between letters
-    const HOLD_AFTER_TEXT = 2200;   // pause before disintegration
-    const PARTICLE_COUNT_PER_LETTER = 7;
+    const LETTER_DELAY = 38;
+    const HOLD_AFTER_TEXT = 2200;
+    const PARTICLE_COUNT_PER_LETTER = 9;
     const HEART_FILL_DURATION = 2200;
 
-    // ---------- DOM ----------
     const messageEl = document.getElementById('message');
     const canvas = document.getElementById('stage');
     const ctx = canvas.getContext('2d');
@@ -227,12 +221,11 @@
     let width, height, dpr;
     let particles = [];
     let heartPoints = [];
-    let animationPhase = 'idle'; // idle | text | disintegrate | formHeart | fillHeart | done
+    let animationPhase = 'idle';
     let fillProgress = 0;
     let rafId = null;
     let letterSpans = [];
 
-    // ---------- Utils ----------
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
@@ -252,15 +245,10 @@
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
 
-    // Heart parametric equation (classic cardioid-like heart)
     function heartPoint(t, scale, cx, cy) {
-      // t in [0, 2π]
       const x = 16 * Math.pow(Math.sin(t), 3);
       const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-      return {
-        x: cx + x * scale,
-        y: cy + y * scale
-      };
+      return { x: cx + x * scale, y: cy + y * scale };
     }
 
     function generateHeartOutline(count, scale, cx, cy) {
@@ -272,32 +260,12 @@
       return pts;
     }
 
-    function generateHeartFillPoints(rows, scale, cx, cy) {
-      // Sample points inside the heart for denser look (used for particle targets)
-      const pts = [];
-      const steps = 80;
-      for (let i = 0; i < steps; i++) {
-        const t = (i / steps) * Math.PI * 2;
-        const outer = heartPoint(t, scale, cx, cy);
-        // also add some inner points
-        for (let r = 0.25; r < 1; r += 0.25) {
-          const inner = heartPoint(t, scale * r, cx, cy);
-          pts.push(inner);
-        }
-        pts.push(outer);
-      }
-      return pts;
-    }
-
-    // ---------- Build text ----------
     function buildMessage() {
       messageEl.innerHTML = '';
       letterSpans = [];
-
-      LINES.forEach((line, lineIdx) => {
+      LINES.forEach((line) => {
         const lineEl = document.createElement('span');
         lineEl.className = 'line';
-
         for (let i = 0; i < line.length; i++) {
           const ch = line[i];
           const span = document.createElement('span');
@@ -306,24 +274,17 @@
           lineEl.appendChild(span);
           letterSpans.push(span);
         }
-
         messageEl.appendChild(lineEl);
       });
     }
 
-    // ---------- Animation phases ----------
     function showLetters() {
       animationPhase = 'text';
       let delay = 0;
-
-      letterSpans.forEach((span, i) => {
-        setTimeout(() => {
-          span.classList.add('visible');
-        }, delay);
+      letterSpans.forEach((span) => {
+        setTimeout(() => { span.classList.add('visible'); }, delay);
         delay += LETTER_DELAY;
       });
-
-      // After all letters + hold → start disintegration
       const totalTextTime = letterSpans.length * LETTER_DELAY + HOLD_AFTER_TEXT;
       setTimeout(startDisintegration, totalTextTime);
     }
@@ -335,14 +296,11 @@
       const heartScale = Math.min(width, height) * 0.0135;
       const cx = width / 2;
       const cy = height / 2 - 20;
-      const outline = generateHeartOutline(140, heartScale, cx, cy);
-      const fillPts = generateHeartFillPoints(40, heartScale * 0.92, cx, cy);
-      heartPoints = [...outline, ...fillPts];
+      // Solo el contorno del corazón (sin puntos interiores)
+      heartPoints = generateHeartOutline(220, heartScale, cx, cy);
 
-      // Create particles from each letter
-      letterSpans.forEach((span, idx) => {
+      letterSpans.forEach((span) => {
         if (span.classList.contains('space')) return;
-
         const rect = span.getBoundingClientRect();
         const startX = rect.left + rect.width / 2;
         const startY = rect.top + rect.height / 2;
@@ -357,31 +315,25 @@
             y: startY + (Math.random() - 0.5) * 6,
             vx: Math.cos(angle) * burst * 0.02,
             vy: Math.sin(angle) * burst * 0.02,
-            targetX: target.x + (Math.random() - 0.5) * 8,
-            targetY: target.y + (Math.random() - 0.5) * 8,
+            targetX: target.x + (Math.random() - 0.5) * 3,
+            targetY: target.y + (Math.random() - 0.5) * 3,
             size: 1.6 + Math.random() * 2.2,
             alpha: 0.85 + Math.random() * 0.15,
             color: Math.random() > 0.7 ? '#fb7185' : '#e11d48',
-            progress: 0,
-            delay: Math.random() * 0.35,
-            life: 1
+            delay: Math.random() * 0.35
           });
         }
-
-        // Hide original letter
         span.style.opacity = '0';
         span.style.transition = 'opacity 0.4s ease';
       });
 
-      // Also hide the whole message container softly
       setTimeout(() => {
         messageEl.style.opacity = '0';
         messageEl.style.transition = 'opacity 0.5s ease';
       }, 300);
 
-      // Start the particle animation loop
       let startTime = null;
-      const duration = 2400; // ms to form the heart
+      const duration = 2400;
 
       function animateForm(ts) {
         if (!startTime) startTime = ts;
@@ -389,14 +341,12 @@
         const t = Math.min(1, elapsed / duration);
 
         ctx.clearRect(0, 0, width, height);
-
         let allArrived = true;
 
         particles.forEach(p => {
           const localT = Math.max(0, Math.min(1, (t - p.delay) / (1 - p.delay)));
           const eased = easeOutCubic(localT);
 
-          // Slight initial burst then pull to target
           if (localT < 0.25) {
             p.x += p.vx;
             p.y += p.vy;
@@ -407,8 +357,7 @@
           p.x += (p.targetX - p.x) * (0.06 + eased * 0.12);
           p.y += (p.targetY - p.y) * (0.06 + eased * 0.12);
 
-          const dist = Math.hypot(p.targetX - p.x, p.targetY - p.y);
-          if (dist > 3) allArrived = false;
+          if (Math.hypot(p.targetX - p.x, p.targetY - p.y) > 3) allArrived = false;
 
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * (0.7 + eased * 0.3), 0, Math.PI * 2);
@@ -422,7 +371,6 @@
         if (t < 1 || !allArrived) {
           rafId = requestAnimationFrame(animateForm);
         } else {
-          // Particles have formed the shape → draw clean heart outline then fill
           startHeartReveal(cx, cy, heartScale);
         }
       }
@@ -432,15 +380,11 @@
 
     function startHeartReveal(cx, cy, scale) {
       animationPhase = 'formHeart';
-
-      // Fade out remaining particles while drawing the clean heart
       let fade = 1;
       const outlinePts = generateHeartOutline(200, scale, cx, cy);
 
       function drawOutlineFrame() {
         ctx.clearRect(0, 0, width, height);
-
-        // residual particles fading
         fade *= 0.94;
         particles.forEach(p => {
           ctx.beginPath();
@@ -451,7 +395,6 @@
         });
         ctx.globalAlpha = 1;
 
-        // Heart outline (stroke only, soft pink)
         ctx.beginPath();
         outlinePts.forEach((pt, i) => {
           if (i === 0) ctx.moveTo(pt.x, pt.y);
@@ -465,7 +408,6 @@
         if (fade > 0.05) {
           rafId = requestAnimationFrame(drawOutlineFrame);
         } else {
-          // Start fill from bottom to top
           startFill(cx, cy, scale, outlinePts);
         }
       }
@@ -478,7 +420,6 @@
       fillProgress = 0;
       const start = performance.now();
 
-      // Precompute bounding box of heart for clip
       let minY = Infinity, maxY = -Infinity;
       outlinePts.forEach(p => {
         if (p.y < minY) minY = p.y;
@@ -493,7 +434,6 @@
 
         ctx.clearRect(0, 0, width, height);
 
-        // Draw outline always
         ctx.beginPath();
         outlinePts.forEach((pt, i) => {
           if (i === 0) ctx.moveTo(pt.x, pt.y);
@@ -504,7 +444,6 @@
         ctx.lineWidth = 2.5;
         ctx.stroke();
 
-        // Clip and fill from bottom
         ctx.save();
         ctx.beginPath();
         outlinePts.forEach((pt, i) => {
@@ -514,7 +453,6 @@
         ctx.closePath();
         ctx.clip();
 
-        // Fill rectangle that grows from bottom
         const fillTop = maxY - heartHeight * eased;
         const gradient = ctx.createLinearGradient(cx, maxY, cx, fillTop);
         gradient.addColorStop(0, '#e11d48');
@@ -523,10 +461,8 @@
 
         ctx.fillStyle = gradient;
         ctx.fillRect(cx - scale * 20, fillTop, scale * 40, maxY - fillTop + 10);
-
         ctx.restore();
 
-        // Soft glow
         if (eased > 0.3) {
           ctx.save();
           ctx.globalAlpha = (eased - 0.3) * 0.25;
@@ -547,7 +483,6 @@
           rafId = requestAnimationFrame(fillFrame);
         } else {
           animationPhase = 'done';
-          // Keep final heart and show button
           showReplay();
         }
       }
@@ -557,9 +492,7 @@
 
     function showReplay() {
       signatureEl.classList.add('visible');
-      setTimeout(() => {
-        replayBtn.classList.add('visible');
-      }, 400);
+      setTimeout(() => { replayBtn.classList.add('visible'); }, 400);
     }
 
     function resetAll() {
@@ -567,28 +500,22 @@
       particles = [];
       fillProgress = 0;
       animationPhase = 'idle';
-
       ctx.clearRect(0, 0, width, height);
       messageEl.style.opacity = '1';
       messageEl.style.transition = 'none';
       signatureEl.classList.remove('visible');
       replayBtn.classList.remove('visible');
-
       buildMessage();
-      // small delay so the DOM is ready
       setTimeout(showLetters, 80);
     }
 
-    // ---------- Init ----------
     window.addEventListener('resize', () => {
       resize();
-      // If already done, just redraw the final heart
       if (animationPhase === 'done') {
         const heartScale = Math.min(width, height) * 0.0135;
         const cx = width / 2;
         const cy = height / 2 - 20;
         const outlinePts = generateHeartOutline(200, heartScale, cx, cy);
-
         ctx.clearRect(0, 0, width, height);
         ctx.beginPath();
         outlinePts.forEach((pt, i) => {
@@ -605,10 +532,8 @@
     });
 
     replayBtn.addEventListener('click', resetAll);
-
     resize();
     buildMessage();
-    // Start after a short breath
     setTimeout(showLetters, 600);
   </script>
 </body>
