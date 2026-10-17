@@ -74,48 +74,33 @@
       will-change: transform;
     }
     .orb-1 {
-      width: 380px;
-      height: 380px;
+      width: 380px; height: 380px;
       background: radial-gradient(circle, #fda4af 0%, #fb7185 60%, transparent 100%);
-      opacity: 0.35;
-      top: -120px;
-      left: -80px;
+      opacity: 0.35; top: -120px; left: -80px;
       animation: float1 18s ease-in-out infinite;
     }
     .orb-2 {
-      width: 340px;
-      height: 340px;
+      width: 340px; height: 340px;
       background: radial-gradient(circle, #c4b5fd 0%, #a78bfa 55%, transparent 100%);
-      opacity: 0.3;
-      bottom: -100px;
-      right: -70px;
+      opacity: 0.3; bottom: -100px; right: -70px;
       animation: float2 22s ease-in-out infinite;
     }
     .orb-3 {
-      width: 240px;
-      height: 240px;
+      width: 240px; height: 240px;
       background: radial-gradient(circle, #fbcfe8 0%, #f9a8d4 50%, transparent 100%);
-      opacity: 0.4;
-      top: 35%;
-      right: 8%;
+      opacity: 0.4; top: 35%; right: 8%;
       animation: float3 14s ease-in-out infinite;
     }
     .orb-4 {
-      width: 200px;
-      height: 200px;
+      width: 200px; height: 200px;
       background: radial-gradient(circle, #fef3c7 0%, #fde68a 50%, transparent 100%);
-      opacity: 0.25;
-      bottom: 20%;
-      left: 5%;
+      opacity: 0.25; bottom: 20%; left: 5%;
       animation: float1 16s ease-in-out infinite reverse;
     }
     .orb-5 {
-      width: 160px;
-      height: 160px;
+      width: 160px; height: 160px;
       background: radial-gradient(circle, #ddd6fe 0%, #c4b5fd 50%, transparent 100%);
-      opacity: 0.28;
-      top: 15%;
-      left: 20%;
+      opacity: 0.28; top: 15%; left: 20%;
       animation: float3 20s ease-in-out infinite 3s;
     }
 
@@ -135,130 +120,60 @@
     }
 
     .vignette {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(255, 240, 245, 0.35) 100%);
-      pointer-events: none;
-      z-index: 1;
+      pointer-events: none; z-index: 1;
     }
 
     .grain {
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 2;
+      position: absolute; inset: 0; opacity: 0.04; pointer-events: none; z-index: 2;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 180px 180px;
+      background-repeat: repeat; background-size: 180px 180px;
     }
 
     #message {
-      position: relative;
-      z-index: 10;
-      max-width: 640px;
-      padding: 0 24px;
-      text-align: center;
-      font-size: clamp(1.05rem, 2.6vw, 1.35rem);
-      font-weight: 400;
-      line-height: 1.7;
-      letter-spacing: 0.01em;
+      position: relative; z-index: 10; max-width: 520px; padding: 0 28px;
+      text-align: center; font-size: clamp(1rem, 2.8vw, 1.28rem);
+      font-weight: 400; line-height: 1.75; letter-spacing: 0.01em;
     }
-
-    #message .line {
-      display: block;
-      margin-bottom: 0.55em;
-    }
-
-    #message .line:last-child {
-      margin-bottom: 0;
-      margin-top: 1.1em;
-      font-weight: 500;
-      font-size: 1.05em;
-    }
-
+    #message .line { display: block; margin-bottom: 0.45em; }
+    #message .line:last-child { margin-bottom: 0; font-weight: 500; font-size: 1.08em; }
     #message .letter {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(-28px);
-      transition: none;
+      display: inline-block; opacity: 0; transform: translateY(-28px); transition: none;
     }
-
     #message .letter.visible {
-      opacity: 1;
-      transform: translateY(0);
+      opacity: 1; transform: translateY(0);
       transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
-    #message .letter.space {
-      width: 0.28em;
-    }
+    #message .letter.space { width: 0.28em; }
 
     #stage {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 5;
-      pointer-events: none;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      z-index: 5; pointer-events: none;
     }
 
     #replay {
-      position: absolute;
-      bottom: 48px;
-      left: 50%;
+      position: absolute; bottom: 48px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      z-index: 20;
-      opacity: 0;
-      pointer-events: none;
+      z-index: 20; opacity: 0; pointer-events: none;
       background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(225, 29, 72, 0.18);
-      color: var(--accent);
-      font-family: inherit;
-      font-size: 0.95rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      padding: 12px 28px;
-      border-radius: 999px;
-      cursor: pointer;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(225, 29, 72, 0.18); color: var(--accent);
+      font-family: inherit; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.02em;
+      padding: 12px 28px; border-radius: 999px; cursor: pointer;
       transition: opacity 0.6s ease, transform 0.6s ease, background 0.25s ease, box-shadow 0.25s ease;
       box-shadow: 0 4px 20px rgba(225, 29, 72, 0.08);
     }
-
-    #replay.visible {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      pointer-events: auto;
-    }
-
-    #replay:hover {
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 6px 28px rgba(225, 29, 72, 0.14);
-    }
-
-    #replay:active {
-      transform: translateX(-50%) scale(0.97);
-    }
+    #replay.visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+    #replay:hover { background: rgba(255, 255, 255, 0.92); box-shadow: 0 6px 28px rgba(225, 29, 72, 0.14); }
+    #replay:active { transform: translateX(-50%) scale(0.97); }
 
     #signature {
-      position: absolute;
-      bottom: 110px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 15;
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: var(--text);
-      opacity: 0;
-      transition: opacity 0.8s ease;
-      letter-spacing: 0.03em;
+      position: absolute; bottom: 110px; left: 50%; transform: translateX(-50%);
+      z-index: 15; font-size: 0.9rem; font-weight: 400; color: var(--text);
+      opacity: 0; transition: opacity 0.8s ease; letter-spacing: 0.03em;
     }
-
-    #signature.visible {
-      opacity: 0.7;
-    }
+    #signature.visible { opacity: 0.7; }
   </style>
 </head>
 <body>
@@ -280,15 +195,18 @@
 
   <script>
     const LINES = [
-      "Hola Ma, espero la pases muy lindo en este día de la madre",
-      "en este día de la madre 2026 intenté hacer algo distinto, espero que te guste y disfrutes tu día.",
+      "Hola Ma, espero la pases muy lindo",
+      "en este d\u00eda de la madre",
+      "en este d\u00eda de la madre 2026 intent\u00e9 hacer algo distinto,",
+      "espero que te guste y disfrutes tu d\u00eda.",
       "Andy"
     ];
 
-    const LETTER_DELAY = 38;
-    const HOLD_AFTER_TEXT = 2200;
-    const PARTICLE_COUNT_PER_LETTER = 9;
-    const HEART_FILL_DURATION = 2200;
+    const LETTER_DELAY = 32;
+    const HOLD_AFTER_TEXT = 2000;
+    const PARTICLES_PER_LETTER = 10;
+    const FORM_DURATION = 2600;
+    const FILL_DURATION = 2000;
 
     const messageEl = document.getElementById('message');
     const canvas = document.getElementById('stage');
@@ -298,11 +216,11 @@
 
     let width, height, dpr;
     let particles = [];
-    let heartPoints = [];
+    let outlinePts = [];
     let animationPhase = 'idle';
-    let fillProgress = 0;
     let rafId = null;
     let letterSpans = [];
+    let heartScale, cx, cy;
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -315,35 +233,35 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function easeOutCubic(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
-
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
     function easeInOutCubic(t) {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     }
 
-    function heartPoint(t, scale, cx, cy) {
+    function heartPoint(t, scale, hx, hy) {
       const x = 16 * Math.pow(Math.sin(t), 3);
       const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
-      return { x: cx + x * scale, y: cy + y * scale };
+      return { x: hx + x * scale, y: hy + y * scale };
     }
 
-    function generateHeartOutline(count, scale, cx, cy) {
+    function generateHeartOutline(count, scale, hx, hy) {
       const pts = [];
       for (let i = 0; i < count; i++) {
-        const t = (i / count) * Math.PI * 2;
-        pts.push(heartPoint(t, scale, cx, cy));
+        pts.push(heartPoint((i / count) * Math.PI * 2, scale, hx, hy));
       }
       return pts;
     }
 
     function buildMessage() {
       messageEl.innerHTML = '';
+      messageEl.style.opacity = '1';
+      messageEl.style.transition = 'none';
       letterSpans = [];
-      LINES.forEach((line) => {
+
+      LINES.forEach((line, idx) => {
         const lineEl = document.createElement('span');
         lineEl.className = 'line';
+        if (idx === LINES.length - 1) lineEl.style.marginTop = '1.1em';
         for (let i = 0; i < line.length; i++) {
           const ch = line[i];
           const span = document.createElement('span');
@@ -360,21 +278,20 @@
       animationPhase = 'text';
       let delay = 0;
       letterSpans.forEach((span) => {
-        setTimeout(() => { span.classList.add('visible'); }, delay);
+        setTimeout(() => span.classList.add('visible'), delay);
         delay += LETTER_DELAY;
       });
-      const totalTextTime = letterSpans.length * LETTER_DELAY + HOLD_AFTER_TEXT;
-      setTimeout(startDisintegration, totalTextTime);
+      setTimeout(startDisintegration, letterSpans.length * LETTER_DELAY + HOLD_AFTER_TEXT);
     }
 
     function startDisintegration() {
       animationPhase = 'disintegrate';
       particles = [];
 
-      const heartScale = Math.min(width, height) * 0.0135;
-      const cx = width / 2;
-      const cy = height / 2 - 20;
-      heartPoints = generateHeartOutline(220, heartScale, cx, cy);
+      heartScale = Math.min(width, height) * 0.014;
+      cx = width / 2;
+      cy = height / 2 - 10;
+      outlinePts = generateHeartOutline(240, heartScale, cx, cy);
 
       letterSpans.forEach((span) => {
         if (span.classList.contains('space')) return;
@@ -382,119 +299,83 @@
         const startX = rect.left + rect.width / 2;
         const startY = rect.top + rect.height / 2;
 
-        for (let p = 0; p < PARTICLE_COUNT_PER_LETTER; p++) {
-          const target = heartPoints[Math.floor(Math.random() * heartPoints.length)];
+        for (let p = 0; p < PARTICLES_PER_LETTER; p++) {
+          const target = outlinePts[Math.floor(Math.random() * outlinePts.length)];
           const angle = Math.random() * Math.PI * 2;
-          const burst = 30 + Math.random() * 90;
+          const speed = 1.5 + Math.random() * 3.5;
 
           particles.push({
-            x: startX + (Math.random() - 0.5) * 6,
-            y: startY + (Math.random() - 0.5) * 6,
-            vx: Math.cos(angle) * burst * 0.02,
-            vy: Math.sin(angle) * burst * 0.02,
-            targetX: target.x + (Math.random() - 0.5) * 3,
-            targetY: target.y + (Math.random() - 0.5) * 3,
-            size: 1.6 + Math.random() * 2.2,
-            alpha: 0.85 + Math.random() * 0.15,
-            color: Math.random() > 0.7 ? '#fb7185' : '#e11d48',
-            delay: Math.random() * 0.35
+            x: startX + (Math.random() - 0.5) * 4,
+            y: startY + (Math.random() - 0.5) * 4,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            targetX: target.x + (Math.random() - 0.5) * 2.5,
+            targetY: target.y + (Math.random() - 0.5) * 2.5,
+            size: 1.8 + Math.random() * 2.4,
+            alpha: 0.9,
+            color: Math.random() > 0.65 ? '#fb7185' : '#e11d48',
+            delay: Math.random() * 0.2
           });
         }
+
+        span.style.transition = 'opacity 0.35s ease, transform 0.4s ease';
         span.style.opacity = '0';
-        span.style.transition = 'opacity 0.4s ease';
+        span.style.transform = 'scale(0.3)';
       });
 
       setTimeout(() => {
+        messageEl.style.transition = 'opacity 0.3s ease';
         messageEl.style.opacity = '0';
-        messageEl.style.transition = 'opacity 0.5s ease';
-      }, 300);
+      }, 450);
 
       let startTime = null;
-      const duration = 2400;
 
       function animateForm(ts) {
         if (!startTime) startTime = ts;
-        const elapsed = ts - startTime;
-        const t = Math.min(1, elapsed / duration);
+        const t = Math.min(1, (ts - startTime) / FORM_DURATION);
 
         ctx.clearRect(0, 0, width, height);
-        let allArrived = true;
+        let allClose = true;
 
         particles.forEach(p => {
-          const localT = Math.max(0, Math.min(1, (t - p.delay) / (1 - p.delay)));
+          const localT = Math.max(0, Math.min(1, (t - p.delay) / (1 - p.delay * 0.5)));
           const eased = easeOutCubic(localT);
 
-          if (localT < 0.25) {
+          if (localT < 0.2) {
             p.x += p.vx;
             p.y += p.vy;
-            p.vx *= 0.92;
-            p.vy *= 0.92;
+            p.vx *= 0.94;
+            p.vy *= 0.94;
           }
 
-          p.x += (p.targetX - p.x) * (0.06 + eased * 0.12);
-          p.y += (p.targetY - p.y) * (0.06 + eased * 0.12);
+          const pull = 0.045 + eased * 0.14;
+          p.x += (p.targetX - p.x) * pull;
+          p.y += (p.targetY - p.y) * pull;
 
-          if (Math.hypot(p.targetX - p.x, p.targetY - p.y) > 3) allArrived = false;
+          if (Math.hypot(p.targetX - p.x, p.targetY - p.y) > 2.5) allClose = false;
 
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * (0.7 + eased * 0.3), 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, p.size * (0.75 + eased * 0.25), 0, Math.PI * 2);
           ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.alpha * (0.5 + eased * 0.5);
+          ctx.globalAlpha = p.alpha * (0.55 + eased * 0.45);
           ctx.fill();
         });
 
         ctx.globalAlpha = 1;
 
-        if (t < 1 || !allArrived) {
+        if (t < 1 || !allClose) {
           rafId = requestAnimationFrame(animateForm);
         } else {
-          startHeartReveal(cx, cy, heartScale);
+          particles.forEach(p => { p.x = p.targetX; p.y = p.targetY; });
+          startFillWithParticles();
         }
       }
 
       rafId = requestAnimationFrame(animateForm);
     }
 
-    function startHeartReveal(cx, cy, scale) {
-      animationPhase = 'formHeart';
-      let fade = 1;
-      const outlinePts = generateHeartOutline(200, scale, cx, cy);
-
-      function drawOutlineFrame() {
-        ctx.clearRect(0, 0, width, height);
-        fade *= 0.94;
-        particles.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * 0.8, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.globalAlpha = p.alpha * fade * 0.4;
-          ctx.fill();
-        });
-        ctx.globalAlpha = 1;
-
-        ctx.beginPath();
-        outlinePts.forEach((pt, i) => {
-          if (i === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
-        });
-        ctx.closePath();
-        ctx.strokeStyle = '#fda4af';
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
-
-        if (fade > 0.05) {
-          rafId = requestAnimationFrame(drawOutlineFrame);
-        } else {
-          startFill(cx, cy, scale, outlinePts);
-        }
-      }
-
-      rafId = requestAnimationFrame(drawOutlineFrame);
-    }
-
-    function startFill(cx, cy, scale, outlinePts) {
+    function startFillWithParticles() {
       animationPhase = 'fillHeart';
-      fillProgress = 0;
       const start = performance.now();
 
       let minY = Infinity, maxY = -Infinity;
@@ -505,21 +386,10 @@
       const heartHeight = maxY - minY;
 
       function fillFrame(now) {
-        const elapsed = now - start;
-        fillProgress = Math.min(1, elapsed / HEART_FILL_DURATION);
-        const eased = easeInOutCubic(fillProgress);
+        const t = Math.min(1, (now - start) / FILL_DURATION);
+        const eased = easeInOutCubic(t);
 
         ctx.clearRect(0, 0, width, height);
-
-        ctx.beginPath();
-        outlinePts.forEach((pt, i) => {
-          if (i === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
-        });
-        ctx.closePath();
-        ctx.strokeStyle = '#fda4af';
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
 
         ctx.save();
         ctx.beginPath();
@@ -531,20 +401,29 @@
         ctx.clip();
 
         const fillTop = maxY - heartHeight * eased;
-        const gradient = ctx.createLinearGradient(cx, maxY, cx, fillTop);
-        gradient.addColorStop(0, '#e11d48');
-        gradient.addColorStop(0.55, '#f43f5e');
+        const gradient = ctx.createLinearGradient(cx, maxY, cx, minY);
+        gradient.addColorStop(0, '#be123c');
+        gradient.addColorStop(0.45, '#e11d48');
         gradient.addColorStop(1, '#fb7185');
-
         ctx.fillStyle = gradient;
-        ctx.fillRect(cx - scale * 20, fillTop, scale * 40, maxY - fillTop + 10);
+        ctx.fillRect(cx - heartScale * 22, fillTop, heartScale * 44, maxY - fillTop + 12);
         ctx.restore();
 
-        if (eased > 0.3) {
+        const particleAlpha = 1 - eased * 0.35;
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 0.95, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha * particleAlpha;
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+
+        if (eased > 0.5) {
           ctx.save();
-          ctx.globalAlpha = (eased - 0.3) * 0.25;
+          ctx.globalAlpha = (eased - 0.5) * 0.2;
           ctx.shadowColor = '#e11d48';
-          ctx.shadowBlur = 30;
+          ctx.shadowBlur = 28;
           ctx.beginPath();
           outlinePts.forEach((pt, i) => {
             if (i === 0) ctx.moveTo(pt.x, pt.y);
@@ -556,9 +435,10 @@
           ctx.restore();
         }
 
-        if (fillProgress < 1) {
+        if (t < 1) {
           rafId = requestAnimationFrame(fillFrame);
         } else {
+          drawFinalHeart();
           animationPhase = 'done';
           showReplay();
         }
@@ -567,19 +447,40 @@
       rafId = requestAnimationFrame(fillFrame);
     }
 
+    function drawFinalHeart() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.beginPath();
+      outlinePts.forEach((pt, i) => {
+        if (i === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.closePath();
+
+      const gradient = ctx.createLinearGradient(cx, cy + heartScale * 14, cx, cy - heartScale * 14);
+      gradient.addColorStop(0, '#be123c');
+      gradient.addColorStop(0.5, '#e11d48');
+      gradient.addColorStop(1, '#f43f5e');
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      ctx.save();
+      ctx.globalAlpha = 0.25;
+      ctx.shadowColor = '#e11d48';
+      ctx.shadowBlur = 24;
+      ctx.fill();
+      ctx.restore();
+    }
+
     function showReplay() {
       signatureEl.classList.add('visible');
-      setTimeout(() => { replayBtn.classList.add('visible'); }, 400);
+      setTimeout(() => replayBtn.classList.add('visible'), 350);
     }
 
     function resetAll() {
       cancelAnimationFrame(rafId);
       particles = [];
-      fillProgress = 0;
       animationPhase = 'idle';
       ctx.clearRect(0, 0, width, height);
-      messageEl.style.opacity = '1';
-      messageEl.style.transition = 'none';
       signatureEl.classList.remove('visible');
       replayBtn.classList.remove('visible');
       buildMessage();
@@ -588,30 +489,19 @@
 
     window.addEventListener('resize', () => {
       resize();
-      if (animationPhase === 'done') {
-        const heartScale = Math.min(width, height) * 0.0135;
-        const cx = width / 2;
-        const cy = height / 2 - 20;
-        const outlinePts = generateHeartOutline(200, heartScale, cx, cy);
-        ctx.clearRect(0, 0, width, height);
-        ctx.beginPath();
-        outlinePts.forEach((pt, i) => {
-          if (i === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
-        });
-        ctx.closePath();
-        ctx.fillStyle = '#e11d48';
-        ctx.fill();
-        ctx.strokeStyle = '#fda4af';
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
+      if (animationPhase === 'done' && outlinePts.length) {
+        heartScale = Math.min(width, height) * 0.014;
+        cx = width / 2;
+        cy = height / 2 - 10;
+        outlinePts = generateHeartOutline(240, heartScale, cx, cy);
+        drawFinalHeart();
       }
     });
 
     replayBtn.addEventListener('click', resetAll);
     resize();
     buildMessage();
-    setTimeout(showLetters, 600);
+    setTimeout(showLetters, 500);
   </script>
 </body>
 </html>
