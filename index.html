@@ -63,16 +63,16 @@ html,body{height:100%;width:100%;overflow:hidden;font-family:Inter,system-ui,-ap
 (function(){
 'use strict';
 const LINES=[
-{text:'Hola Ma,',gapAfter:false},
-{text:'espero que la pases muy lindo',gapAfter:false},
-{text:'en este d\u00eda de la madre.',gapAfter:true},
-{text:'En este d\u00eda de la madre 2026',gapAfter:false},
-{text:'intent\u00e9 hacer algo distinto;',gapAfter:false},
-{text:'espero que te guste',gapAfter:false},
-{text:'y disfrutes tu d\u00eda.',gapAfter:false},
-{text:'Andy',gapAfter:false,isSignature:true}
+{text:'Hola Ma,',gapAfter:false,pause:'short'},
+{text:'espero que la pases muy lindo',gapAfter:false,pause:'short'},
+{text:'en este d\u00eda de la madre.',gapAfter:true,pause:'long'},
+{text:'En este d\u00eda de la madre 2026',gapAfter:false,pause:'short'},
+{text:'intent\u00e9 hacer algo distinto,',gapAfter:false,pause:'short'},
+{text:'espero que te guste',gapAfter:false,pause:'short'},
+{text:'y disfrutes tu d\u00eda.',gapAfter:false,pause:'medium'},
+{text:'Andy',gapAfter:false,isSignature:true,pause:'medium'}
 ];
-const CHAR_MS=38,LINE_PAUSE_MS=580,HOLD_AFTER_TEXT_MS=2200,FORM_MS=3000,FILL_MS=2400,PARTICLES_PER_CHAR=11,AFTERGLOW_MS=6500;
+const CHAR_MS=36,PAUSE={short:160,medium:360,long:600},HOLD_AFTER_TEXT_MS=2000,FORM_MS=3000,FILL_MS=2400,PARTICLES_PER_CHAR=11,AFTERGLOW_MS=6500;
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const messageEl=document.getElementById('message');
 const canvas=document.getElementById('stage');
@@ -90,7 +90,7 @@ function smoothstep(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)}
 function heartPoint(t,scale,hx,hy){const x=16*Math.pow(Math.sin(t),3);const y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));return{x:hx+x*scale,y:hy+y*scale}}
 function generateHeartOutline(count,scale,hx,hy){const pts=[];for(let i=0;i<count;i++)pts.push(heartPoint((i/count)*Math.PI*2,scale,hx,hy));return pts}
 function buildMessage(){messageEl.innerHTML='';messageEl.style.opacity='1';messageEl.style.transition='none';charEls=[];LINES.forEach(line=>{const lineEl=document.createElement('span');lineEl.className='line'+(line.gapAfter?' gap-after':'')+(line.isSignature?' signature-line':'');for(let i=0;i<line.text.length;i++){const ch=line.text[i];const span=document.createElement('span');span.className='char'+(ch===' '?' space':'');span.textContent=ch===' '?'\u00A0':ch;lineEl.appendChild(span);charEls.push(span)}messageEl.appendChild(lineEl)})}
-function runTypewriter(done){phase='text';const lineEnds=[];let acc=0;LINES.forEach(line=>{acc+=line.text.length;lineEnds.push(acc-1)});let i=0;function next(){if(i>=charEls.length){trackTimeout(done,HOLD_AFTER_TEXT_MS);return}charEls[i].classList.add('on');const isLineEnd=lineEnds.indexOf(i)!==-1;i++;trackTimeout(next,isLineEnd?LINE_PAUSE_MS:CHAR_MS)}trackTimeout(next,450)}
+function runTypewriter(done){phase='text';const lineEndPause={};let acc=0;LINES.forEach(line=>{acc+=line.text.length;lineEndPause[acc-1]=PAUSE[line.pause||'medium']||PAUSE.medium});let i=0;function next(){if(i>=charEls.length){trackTimeout(done,HOLD_AFTER_TEXT_MS);return}charEls[i].classList.add('on');const delay=(i in lineEndPause)?lineEndPause[i]:CHAR_MS;i++;trackTimeout(next,delay)}trackTimeout(next,400)}
 function startDisintegration(){phase='disintegrate';particles=[];residualParticles=[];heartScale=Math.min(width,height)*0.0138;cx=width/2;cy=height/2-height*0.02;outlinePts=generateHeartOutline(320,heartScale,cx,cy);
 if(reducedMotion){messageEl.style.transition='opacity .8s ease';messageEl.style.opacity='0';trackTimeout(()=>{drawSimpleHeart(1);phase='done';showEndUI()},900);return}
 const origins=[];charEls.forEach(el=>{if(el.classList.contains('space')||!el.classList.contains('on'))return;const r=el.getBoundingClientRect();origins.push({x:r.left+r.width/2,y:r.top+r.height/2});el.style.transition='opacity .4s ease,transform .45s ease';el.style.opacity='0';el.style.transform='scale(.4) translateY(4px)'});
